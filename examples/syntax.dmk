@@ -1,0 +1,47 @@
+module subject;
+
+port SubjectRepository {
+  async v1CreateSubject(userId: String, deckId: String, subject: Subject) -> Subject
+}
+
+schema Subject {
+  id: Uuid,
+  createdAt: Timestamp,
+  updatedAt: Timestamp,
+
+
+  category: String(max = 80, min = 1)
+
+  level: UInt8(min = 1),
+  value: String?,
+
+  // other fields ...
+}
+
+schema CreateSubject from Subject [
+    category?,
+
+
+    ~id,
+    ~createdAt,
+    ~updatedAt,
+    ...
+  ]
+{
+  attachments: List<String>
+}
+
+
+schema LtdString(max) = String(max = max, min = 1)
+schema Foo(maxltd) {
+  id: Uuid,
+
+  createdAt: Timestamp(default = "now"),
+  updatedAt: Timestamp(default = "now"),
+
+  name: String(max = 80, min = 1),
+  description: String(max = 1000, min = 1),
+
+  list: List<LtdString(max = maxltd)>(default = ["foo", "bar"]),
+  metadata: Map<String, Float32>(default = {"foo": 1.0, "bar": 2.0}),
+}
