@@ -6,7 +6,9 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+domaker-base = { version = "0.1.0", path = "../base" }
 lalrpop-util = { version = "0.20.0", features = ["lexer", "unicode"] }
+thiserror = "1.0.56"
 
 [build-dependencies]
 lalrpop = { version = "0.20.0" }

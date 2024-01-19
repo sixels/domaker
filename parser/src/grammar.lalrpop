@@ -1,9 +1,15 @@
 use std::vec::Vec;
+use lalrpop_util::ErrorRecovery;
 
-use crate::ast;
+use crate::{ast, error::Error};
 
 
-grammar;
+grammar<'err>(source: &str, errors: &'err mut Vec<ErrorRecovery<usize, Token<'input>, Error>>);
+
+extern {
+  type Location = usize;
+  type Error = Error;
+}
 
 match {
     r"\s*" => { },

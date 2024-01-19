@@ -1,2 +1,3 @@
 pub mod ast;
-mod spec;
+pub mod error;
+pub mod parser;
